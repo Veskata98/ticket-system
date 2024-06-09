@@ -1,10 +1,10 @@
 import { getSession } from '@/lib/session';
 import Link from 'next/link';
 
-import { LogOutButton } from '@/components/auth/LogOutButton';
+import { LogOutButton } from './LogOutButton';
 
-export const Navbar = () => {
-    const hasUser = getSession();
+export const Navbar = async () => {
+    const hasUser = await getSession();
 
     return (
         <div className="w-full p-4 bg-zinc-200 ">
