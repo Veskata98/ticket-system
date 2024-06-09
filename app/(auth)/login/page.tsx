@@ -1,6 +1,6 @@
 'use client';
 
-import { login } from '@/actions/auth';
+import { signIn } from '@/actions/authActions';
 import { Eye } from 'lucide-react';
 
 import { useState } from 'react';
@@ -17,7 +17,7 @@ export default function LoginPage() {
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                             Влизане в профил
                         </h1>
-                        <form className="space-y-4 md:space-y-6" action={login}>
+                        <form className="space-y-4 md:space-y-6" action={signIn}>
                             <div>
                                 <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">
                                     Потребителско Име
