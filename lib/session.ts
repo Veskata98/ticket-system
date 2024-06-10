@@ -20,13 +20,35 @@ export async function getSession() {
     const session = cookies().get('session')?.value;
     if (!session) return null;
 
-    const decryptedSession = await decrypt(session);
-    return decryptedSession?.user as User;
+    const { user }: { user: User } = await decrypt(session);
+    return user;
 }
 
 export async function updateSession(request: NextRequest) {
     const session = request.cookies.get('session')?.value;
-    if (!session) return;
+
+    if (!session && request.nextUrl.pathname !== '/login') {
+        return NextResponse.redirect(new URL('/login', request.url));
+    }
+
+    if (session && request.nextUrl.pathname === '/login') {
+        const decryptedValue = await decrypt(session);
+        if ('user' in decryptedValue) {
+            return NextResponse.redirect(new URL('/', request.url));
+        }
+    }
+
+    if (session && request.nextUrl.pathname.startsWith('/admin')) {
+        const { user } = await decrypt(session);
+
+        if (user?.role !== 'admin') {
+            return NextResponse.redirect(new URL('/', request.url));
+        }
+    }
+
+    if (!session) {
+        return;
+    }
 
     // Refresh the session so it doesn't expire
     const parsed = await decrypt(session);

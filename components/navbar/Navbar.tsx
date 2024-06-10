@@ -17,7 +17,7 @@ export const Navbar = async () => {
                     <li></li>
                     {user?.role === 'admin' && (
                         <li>
-                            <Link href="/admin/createUsers">Add users</Link>
+                            <Link href="/admin/createUsers">Admin</Link>
                         </li>
                     )}
                     {user ? (
