@@ -5,14 +5,14 @@ import { useFormState } from 'react-dom';
 
 import { useToast } from '@/components/ui/use-toast';
 
-import { createUser } from '@/actions/authActions';
+import { createUser } from '@/actions/userActions';
 
 const initialState: { username: string | null; error: string | null } = {
     username: null,
     error: null,
 };
 
-export default function CreateUserPage() {
+export const CreateUser = () => {
     const { toast } = useToast();
     const [state, formAction] = useFormState(createUser, initialState);
     const formRef = useRef<HTMLFormElement | null>(null);
@@ -73,4 +73,4 @@ export default function CreateUserPage() {
             </div>
         </section>
     );
-}
+};

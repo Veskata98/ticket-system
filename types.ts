@@ -1,4 +1,4 @@
-export type User = {
+export type TUser = {
     username: string;
     hashedPassword: string;
     role: 'admin' | 'regular';
