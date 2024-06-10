@@ -1,3 +1,4 @@
+import { User } from '@/types';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
@@ -18,7 +19,9 @@ export async function decrypt(input: string): Promise<any> {
 export async function getSession() {
     const session = cookies().get('session')?.value;
     if (!session) return null;
-    return await decrypt(session);
+
+    const decryptedSession = await decrypt(session);
+    return decryptedSession?.user as User;
 }
 
 export async function updateSession(request: NextRequest) {

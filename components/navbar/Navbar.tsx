@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { LogOutButton } from './LogOutButton';
 
 export const Navbar = async () => {
-    const hasUser = await getSession();
+    const user = await getSession();
 
     return (
         <div className="w-full p-4 bg-zinc-200 ">
@@ -12,10 +12,15 @@ export const Navbar = async () => {
                 <h1>
                     <Link href="/">Начало</Link>
                 </h1>
-                <ul>
+                <ul className="flex gap-x-2">
                     <li></li>
                     <li></li>
-                    {hasUser ? (
+                    {user?.role === 'admin' && (
+                        <li>
+                            <Link href="/admin/createUsers">Add users</Link>
+                        </li>
+                    )}
+                    {user ? (
                         <li>
                             <LogOutButton />
                         </li>
