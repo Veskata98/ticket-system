@@ -1,13 +1,21 @@
 'use client';
 
 import { signIn } from '@/actions/authActions';
+import { cn } from '@/lib/utils';
 import { Eye } from 'lucide-react';
 
 import { useState } from 'react';
+import { useFormState } from 'react-dom';
+
+const initialState: { error: null | string } = {
+    error: null,
+};
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [showEyeIcon, setShowEyeIcon] = useState(false);
+
+    const [state, formAction] = useFormState(signIn, initialState);
 
     return (
         <section className="flex-1">
@@ -17,7 +25,8 @@ export default function LoginPage() {
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                             Влизане в профил
                         </h1>
-                        <form className="space-y-4 md:space-y-6" action={signIn}>
+                        {state.error && <p className="text-red-500 text-sm">{state.error}</p>}
+                        <form className="space-y-4 md:space-y-6" action={formAction}>
                             <div>
                                 <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">
                                     Потребителско Име
@@ -44,13 +53,12 @@ export default function LoginPage() {
                                 />
                                 <button
                                     type="button"
-                                    onMouseDown={() => setShowPassword(true)}
-                                    onMouseUp={() => setShowPassword(false)}
+                                    onClick={() => setShowPassword((prevState) => !prevState)}
                                     className={`absolute right-0 top-10 flex items-center px-2 focus:outline-none ${
                                         !showEyeIcon && 'hidden'
                                     }`}
                                 >
-                                    <Eye className="w-5 h-5 text-gray-400" />
+                                    <Eye className={cn('w-5 h-5', showPassword ? 'text-[#22c55e]' : 'text-gray-400')} />
                                 </button>
                             </div>
                             <button

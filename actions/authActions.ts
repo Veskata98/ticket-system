@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation'; // or your routing library
 import connectToDatabase from '@/lib/db'; // adjust the path
 import User from '@/models/User'; // adjust the path
 
-export const signIn = async (formData: FormData) => {
+export const signIn = async (prevState: any, formData: FormData) => {
     const username = (formData.get('username') as string).toLowerCase();
     const password = formData.get('password') as string;
 
@@ -16,7 +16,7 @@ export const signIn = async (formData: FormData) => {
     const user = await User.findOne({ username });
 
     if (!user) {
-        return { error: 'User not found' };
+        return { error: 'Грешно потребителско име или парола' };
     }
 
     // Compare the hashed password
