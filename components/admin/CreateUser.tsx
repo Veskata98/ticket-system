@@ -5,7 +5,7 @@ import { useFormState } from 'react-dom';
 
 import { useToast } from '@/components/ui/use-toast';
 
-import { createUser } from '@/actions/userActions';
+// import { createUser } from '@/actions/userActions';
 
 const initialState: { username: string | null; error: string | null } = {
     username: null,
@@ -14,18 +14,18 @@ const initialState: { username: string | null; error: string | null } = {
 
 export const CreateUser = () => {
     const { toast } = useToast();
-    const [state, formAction] = useFormState(createUser, initialState);
+    // const [state, formAction] = useFormState(createUser, initialState);
     const formRef = useRef<HTMLFormElement | null>(null);
 
-    useEffect(() => {
-        if (state.username) {
-            formRef?.current?.reset();
-            toast({
-                className: 'bg-green-500 text-white font-semibold',
-                description: `${state.username} е създаден успешно!`,
-            });
-        }
-    }, [state.username, toast]);
+    // useEffect(() => {
+    //     if (state.username) {
+    //         formRef?.current?.reset();
+    //         toast({
+    //             className: 'bg-green-500 text-white font-semibold',
+    //             description: `${state.username} е създаден успешно!`,
+    //         });
+    //     }
+    // // }, [state.username, toast]);
 
     return (
         <section className="flex-1">
@@ -35,8 +35,9 @@ export const CreateUser = () => {
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                             Добавяне на профил
                         </h1>
-                        {state.error && <p className="text-red-500 text-sm">{state.error}</p>}
-                        <form className="space-y-4 md:space-y-6" ref={formRef} action={formAction}>
+                        {/* {state.error && <p className="text-red-500 text-sm">{state.error}</p>} */}
+                        {/* <form className="space-y-4 md:space-y-6" ref={formRef} action={formAction}> */}
+                        <form className="space-y-4 md:space-y-6" ref={formRef}>
                             <div>
                                 <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">
                                     Потребителско Име

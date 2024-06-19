@@ -1,6 +1,8 @@
 export type TUser = {
+    id: string;
     username: string;
-    hashedPassword: string;
+    password: string;
+    createdAt: Date;
     role: 'admin' | 'regular';
-    _id: string;
+    updatedAt: Date;
 };
