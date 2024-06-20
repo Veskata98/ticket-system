@@ -35,14 +35,14 @@ export const AddTicketModal = ({ isOpen, onClose }: AddTicketModalProps) => {
             <div className="bg-white rounded-lg p-6 shadow-lg w-5/6 md:w-2/3 lg:w-1/3">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-2xl font-semibold">Добави тикет</h2>
-                    <button onClick={onClose} className="text-red-600 hover:text-red-900 text-3xl pr-2">
+                    <button onClick={onClose} className="text-red-600 text-3xl pr-2">
                         &times;
                     </button>
                 </div>
                 <form>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700" htmlFor="title">
-                            Title
+                            Заглавие
                         </label>
                         <input
                             id="title"
@@ -53,7 +53,7 @@ export const AddTicketModal = ({ isOpen, onClose }: AddTicketModalProps) => {
                     </div>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700" htmlFor="description">
-                            Description
+                            Описание
                         </label>
                         <textarea
                             id="description"
@@ -67,13 +67,13 @@ export const AddTicketModal = ({ isOpen, onClose }: AddTicketModalProps) => {
                             onClick={onClose}
                             className="mr-2 py-2 px-4 bg-gray-300 hover:bg-gray-400 rounded-md"
                         >
-                            Cancel
+                            Отказ
                         </button>
                         <button
                             type="submit"
                             className="py-2 px-4 bg-green-600 text-white hover:bg-green-700 rounded-md"
                         >
-                            Add Ticket
+                            Добави
                         </button>
                     </div>
                 </form>
