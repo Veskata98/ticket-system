@@ -23,6 +23,7 @@ export const CreateUser = () => {
             toast({
                 className: 'bg-green-500 text-white font-semibold',
                 description: `${state.username} е създаден успешно!`,
+                duration: 1500,
             });
         }
     }, [state.username, state.error, toast]);
@@ -45,7 +46,6 @@ export const CreateUser = () => {
                                     type="text"
                                     name="username"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 focus:outline-none"
-                                    placeholder="user1"
                                     required
                                 />
                             </div>
@@ -56,7 +56,6 @@ export const CreateUser = () => {
                                 <input
                                     type="text"
                                     name="password"
-                                    placeholder="123"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 focus:outline-none"
                                     required
                                 />

@@ -1,6 +1,7 @@
-import { deleteUser } from '@/actions/userActions';
 import { useEffect } from 'react';
-import { toast } from '../ui/use-toast';
+
+import { toast } from '@/components/ui/use-toast';
+import { deleteUser } from '@/actions/userActions';
 
 type DeleteUserModalProps = {
     userId: string;

@@ -1,12 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-
-import { deleteUser } from '@/actions/userActions';
 import { X } from 'lucide-react';
-import { toast } from '../ui/use-toast';
 
-import { DeleteUserModal } from '@/components/modals/DeleteUserModal';
+import { DeleteUserModal } from '@/components/admin/modals/DeleteUserModal';
 
 export const DeleteUserButton = ({ id, username }: { id: string; username: string }) => {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -20,7 +17,7 @@ export const DeleteUserButton = ({ id, username }: { id: string; username: strin
                 width={20}
                 height={20}
                 className="cursor-pointer hover:text-rose-500 hover:font-bold"
-                onClick={() => setModalOpen((prevState) => !prevState)}
+                onClick={openModal}
             />
             {isModalOpen && <DeleteUserModal userId={id} username={username} isOpen={openModal} onClose={closeModal} />}
         </>

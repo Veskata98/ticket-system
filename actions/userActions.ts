@@ -43,7 +43,15 @@ export const createUser = async (prevState: any, formData: FormData) => {
 
 export const deleteUser = async (id: string) => {
     try {
+        const loggedUser = await getSession();
+
+        if (!loggedUser || loggedUser.role !== 'admin') {
+            return redirect('/');
+        }
+
         await prisma.users.delete({ where: { id } });
         revalidatePath('/admin/dashboard');
-    } catch (error) {}
+    } catch (error) {
+        console.error('[DELETE_USER_SERVER_ACTION]Something went wrong!');
+    }
 };
