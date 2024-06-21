@@ -18,14 +18,14 @@ export const CreateUser = () => {
     const formRef = useRef<HTMLFormElement | null>(null);
 
     useEffect(() => {
-        if (state.username) {
+        if (!state.error && state.username) {
             formRef?.current?.reset();
             toast({
                 className: 'bg-green-500 text-white font-semibold',
                 description: `${state.username} е създаден успешно!`,
             });
         }
-    }, [state.username, toast]);
+    }, [state.username, state.error, toast]);
 
     return (
         <section className="flex-1">
@@ -36,16 +36,7 @@ export const CreateUser = () => {
                             Добавяне на профил
                         </h1>
                         {state.error && <p className="text-red-500 text-sm">{state.error}</p>}
-                        <form
-                            className="space-y-4 md:space-y-6"
-                            ref={formRef}
-                            action={async (formData) => {
-                                formAction(formData);
-                                if (!state.error) {
-                                    formRef.current?.reset();
-                                }
-                            }}
-                        >
+                        <form className="space-y-4 md:space-y-6" ref={formRef} action={formAction}>
                             <div>
                                 <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">
                                     Потребителско Име
@@ -54,7 +45,7 @@ export const CreateUser = () => {
                                     type="text"
                                     name="username"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 focus:outline-none"
-                                    placeholder="klt"
+                                    placeholder="user1"
                                     required
                                 />
                             </div>
@@ -65,7 +56,7 @@ export const CreateUser = () => {
                                 <input
                                     type="text"
                                     name="password"
-                                    placeholder="Qaz123"
+                                    placeholder="123"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 focus:outline-none"
                                     required
                                 />

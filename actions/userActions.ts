@@ -20,7 +20,7 @@ export const createUser = async (prevState: any, formData: FormData) => {
         const username = (formData.get('username') as string).toLowerCase().trim();
         const password = formData.get('password') as string;
 
-        const duplicateUser = await prisma.users.findUnique({
+        const duplicateUser = await prisma.users.findFirst({
             where: {
                 username,
             },
