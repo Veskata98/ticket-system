@@ -5,6 +5,10 @@ import { TUser } from '@/types';
 export const AllUsers = async () => {
     const users: TUser[] = await prisma.users.findMany({ where: { role: { not: 'admin' } } });
 
+    if (!users.length) {
+        return null;
+    }
+
     return (
         <div className="p-4 w-48">
             {users.map((user) => (

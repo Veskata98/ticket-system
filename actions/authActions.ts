@@ -39,7 +39,6 @@ export const signIn = async (prevState: any, formData: FormData) => {
 
         // Save the session in a cookie
         cookies().set('session', session, { expires: new Date(expires * 1000), httpOnly: true });
-        redirect('/');
     } catch (error) {
         if (error instanceof Error) {
             return { error: error.message };
@@ -47,6 +46,8 @@ export const signIn = async (prevState: any, formData: FormData) => {
 
         return { error: 'Нещо се обърка' };
     }
+
+    redirect('/');
 };
 
 export const signOut = async () => {

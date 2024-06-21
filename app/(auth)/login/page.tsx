@@ -25,7 +25,7 @@ export default function LoginPage() {
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                             Влизане в профил
                         </h1>
-                        {state.error && <p className="text-red-500 text-sm">{state.error}</p>}
+                        {state?.error && <p className="text-red-500 text-sm">{state.error}</p>}
                         <form className="space-y-4 md:space-y-6" action={formAction}>
                             <div>
                                 <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">

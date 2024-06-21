@@ -6,9 +6,17 @@ import { revalidatePath } from 'next/cache';
 import { TUser } from '@/types';
 
 import prisma from '@/lib/db';
+import { getSession } from '@/lib/session';
+import { redirect } from 'next/navigation';
 
 export const createUser = async (prevState: any, formData: FormData) => {
     try {
+        const loggedUser = await getSession();
+
+        if (!loggedUser || loggedUser.role !== 'admin') {
+            return redirect('/');
+        }
+
         const username = (formData.get('username') as string).toLowerCase().trim();
         const password = formData.get('password') as string;
 

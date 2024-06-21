@@ -36,7 +36,16 @@ export const CreateUser = () => {
                             Добавяне на профил
                         </h1>
                         {state.error && <p className="text-red-500 text-sm">{state.error}</p>}
-                        <form className="space-y-4 md:space-y-6" ref={formRef} action={formAction}>
+                        <form
+                            className="space-y-4 md:space-y-6"
+                            ref={formRef}
+                            action={async (formData) => {
+                                formAction(formData);
+                                if (!state.error) {
+                                    formRef.current?.reset();
+                                }
+                            }}
+                        >
                             <div>
                                 <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">
                                     Потребителско Име

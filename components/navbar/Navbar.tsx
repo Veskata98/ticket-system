@@ -15,11 +15,6 @@ export const Navbar = async () => {
                 <ul className="flex gap-x-2">
                     <li></li>
                     <li></li>
-                    {user?.role === 'admin' && (
-                        <li>
-                            <Link href="/admin/dashboard">Admin</Link>
-                        </li>
-                    )}
                     {user ? (
                         <li>
                             <LogOutButton />
