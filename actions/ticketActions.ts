@@ -1,10 +1,10 @@
 'use server';
 
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 import { getSession } from '@/lib/session';
 import prisma from '@/lib/db';
-import { revalidatePath } from 'next/cache';
 
 export const createTicket = async (formData: FormData) => {
     try {
@@ -51,6 +51,22 @@ export const getTicketsForUser = async () => {
     }
 };
 
+export const getAllTicketsForAdmin = async () => {
+    try {
+        const user = await getSession();
+
+        if (!user || user.role !== 'admin') {
+            redirect('/');
+        }
+
+        const tickets = await prisma.ticket.findMany({ include: { creator: true }, orderBy: { createdAt: 'desc' } });
+        return tickets;
+    } catch (e) {
+        console.error(e);
+        return [];
+    }
+};
+
 export const deleteTicket = async (ticketId: string) => {
     try {
         const user = await getSession();
@@ -59,7 +75,16 @@ export const deleteTicket = async (ticketId: string) => {
             redirect('/');
         }
 
-        await prisma.ticket.delete({ where: { id: ticketId, AND: { creatorId: user.id } } });
+        const canDelete = user.role === 'admin';
+
+        const whereCondition = canDelete
+            ? { id: ticketId } // If the user is an admin, only the ticket ID needs to match.
+            : { id: ticketId, creatorId: user.id }; // If not an admin, both the ticket ID and creator ID must match.
+
+        await prisma.ticket.delete({
+            where: whereCondition,
+        });
+
         revalidatePath('/');
     } catch (error) {}
 };

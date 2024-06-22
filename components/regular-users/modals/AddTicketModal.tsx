@@ -78,7 +78,10 @@ export const AddTicketModal = ({ isOpen, onClose }: AddTicketModalProps) => {
                         <textarea
                             name="description"
                             required
-                            className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block focus:outline-none"
+                            rows={4}
+                            className="mt-1 p-2 w-full border border-gray-300 
+                            rounded-md shadow-sm focus:ring-2 focus:ring-primary-600
+                            focus:border-primary-600 block focus:outline-none"
                         ></textarea>
                     </div>
                     <div className="flex justify-end">

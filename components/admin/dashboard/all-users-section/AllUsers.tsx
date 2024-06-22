@@ -11,9 +11,9 @@ export const AllUsers = async () => {
     }
 
     return (
-        <div className="p-4 w-48">
+        <div className="p-4 md:w-60 w-full">
             {users.map((user) => (
-                <div key={user.id} className="flex w-full justify-between items-center mb-2">
+                <div key={user.id} className="flex w-full justify-between items-center mb-4 border-b-2 p-2">
                     <p>{user.username}</p>
                     <DeleteUserButton id={user.id.toString()} username={user.username} />
                 </div>

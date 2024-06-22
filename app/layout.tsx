@@ -22,8 +22,8 @@ export default function RootLayout({
                 <div className="flex flex-col h-full w-full">
                     <Toaster />
                     <Navbar />
-                    <main className="w-full p-4">
-                        <div className="flex items-center justify-center">{children}</div>
+                    <main className="w-full h-full p-4">
+                        <div className="h-full flex justify-center">{children}</div>
                     </main>
                 </div>
             </body>
