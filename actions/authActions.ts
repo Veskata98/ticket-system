@@ -14,7 +14,7 @@ export const signIn = async (prevState: any, formData: FormData) => {
         const username = (formData.get('username') as string).toLowerCase();
         const password = formData.get('password') as string;
 
-        const user = await prisma.users.findFirst({ where: { username } });
+        const user = await prisma.user.findFirst({ where: { username } });
 
         if (!user) {
             throw new Error('Грешно потребителско име или парола');

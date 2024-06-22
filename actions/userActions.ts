@@ -20,7 +20,7 @@ export const createUser = async (prevState: any, formData: FormData) => {
         const username = (formData.get('username') as string).toLowerCase().trim();
         const password = formData.get('password') as string;
 
-        const duplicateUser = await prisma.users.findFirst({
+        const duplicateUser = await prisma.user.findFirst({
             where: {
                 username,
             },
@@ -32,7 +32,7 @@ export const createUser = async (prevState: any, formData: FormData) => {
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const user: TUser = await prisma.users.create({ data: { username, hashedPassword } });
+        const user: TUser = await prisma.user.create({ data: { username, hashedPassword } });
 
         revalidatePath('/admin/dashboard');
         return { username: user.username, error: null };
@@ -49,7 +49,7 @@ export const deleteUser = async (id: string) => {
             return redirect('/');
         }
 
-        await prisma.users.delete({ where: { id } });
+        await prisma.user.delete({ where: { id } });
         revalidatePath('/admin/dashboard');
     } catch (error) {
         console.error('[DELETE_USER_SERVER_ACTION]Something went wrong!');

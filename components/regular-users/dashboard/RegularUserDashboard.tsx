@@ -1,21 +1,13 @@
-'use client';
-
-import { useState } from 'react';
-
-import { AddTicketModal } from '@/components/regular-users/modals/AddTicketModal';
-import { AddTicketButton } from '../tickets/AddTicketButton';
+import { MyTickets } from '../tickets/my-tickets/MyTickets';
+import { CreateTicket } from '../tickets/create-ticket/CreateTicket';
 
 const RegularUserDashboard = () => {
-    const [isModalOpen, setModalOpen] = useState(false);
-
-    const openModal = () => setModalOpen(true);
-    const closeModal = () => setModalOpen(false);
-
     return (
-        <div>
-            <AddTicketButton isOpen={openModal} />
-
-            {isModalOpen && <AddTicketModal isOpen={openModal} onClose={closeModal} />}
+        <div className="w-full">
+            <CreateTicket />
+            <div className="w-full md:w-2/3 m-auto">
+                <MyTickets />
+            </div>
         </div>
     );
 };

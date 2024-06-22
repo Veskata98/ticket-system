@@ -4,7 +4,7 @@ import { TUser } from '@/types';
 import { DeleteUserButton } from '@/components/admin/dashboard/DeleteUserButton';
 
 export const AllUsers = async () => {
-    const users: TUser[] = await prisma.users.findMany({ where: { role: { not: 'admin' } } });
+    const users: TUser[] = await prisma.user.findMany({ where: { role: { not: 'admin' } } });
 
     if (!users.length) {
         return null;

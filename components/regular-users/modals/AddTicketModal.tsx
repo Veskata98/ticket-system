@@ -1,11 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useFormState } from 'react-dom';
+
+import { createTicket } from '@/actions/ticketActions';
 
 type AddTicketModalProps = {
     isOpen: () => void;
     onClose: () => void;
 };
 
+const initialState: { error: null | string } = {
+    error: null,
+};
+
 export const AddTicketModal = ({ isOpen, onClose }: AddTicketModalProps) => {
+    const [error, setError] = useState<string | null>(null);
+
     const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget) {
             onClose();
@@ -39,26 +48,37 @@ export const AddTicketModal = ({ isOpen, onClose }: AddTicketModalProps) => {
                         &times;
                     </button>
                 </div>
-                <form>
+                {error && <p className="text-red-500 font-semibold mb-2">{error}</p>}
+                <form
+                    action={async (formData) => {
+                        const res = await createTicket(formData);
+
+                        if (!res.error) {
+                            onClose();
+                        }
+
+                        setError(res.error);
+                    }}
+                >
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700" htmlFor="title">
                             Заглавие
                         </label>
                         <input
-                            id="title"
+                            name="title"
                             type="text"
-                            className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Ticket Title"
+                            required
+                            className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block focus:outline-none"
                         />
                     </div>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700" htmlFor="description">
-                            Описание
+                            Описание на проблема
                         </label>
                         <textarea
-                            id="description"
-                            className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Ticket Description"
+                            name="description"
+                            required
+                            className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-primary-600 focus:border-primary-600 block focus:outline-none"
                         ></textarea>
                     </div>
                     <div className="flex justify-end">
