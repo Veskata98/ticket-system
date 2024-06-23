@@ -1,12 +1,12 @@
 import prisma from '@/lib/db';
-import { TUser } from '@/types';
+import { User } from '@prisma/client';
 
 import { DeleteUserButton } from '@/components/admin/dashboard/DeleteUserButton';
 
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 
 export const AllUsers = async () => {
-    const users: TUser[] = await prisma.user.findMany({ where: { role: { not: 'admin' } } });
+    const users: User[] = await prisma.user.findMany({ where: { role: { not: 'admin' } } });
 
     if (!users.length) {
         return null;

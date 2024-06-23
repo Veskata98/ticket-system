@@ -1,7 +1,9 @@
-import { TUser } from '@/types';
-import { SignJWT, jwtVerify } from 'jose';
-import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+
+import { SignJWT, jwtVerify } from 'jose';
+
+import { User } from '@prisma/client';
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
@@ -20,7 +22,7 @@ export async function getSession() {
     const session = cookies().get('session')?.value;
     if (!session) return null;
 
-    const { user }: { user: TUser } = await decrypt(session);
+    const { user }: { user: User } = await decrypt(session);
     return user;
 }
 
