@@ -1,14 +1,16 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { DeleteTicketButton } from './DeleteTicketButton';
 
-import { TTicket, TTicketWithCreator } from '@/types';
+import { Ticket } from '@prisma/client';
+import { TicketWithCreator } from '@/types';
+
 import { getSession } from '@/lib/session';
 
 import { CompleteTicketButton } from './admin/tickets/complete-ticket/CompleteTicketButton';
 import { cn } from '@/lib/utils';
 
 type TicketCardProps = {
-    ticket: TTicketWithCreator | TTicket;
+    ticket: Ticket | TicketWithCreator;
     showCreator?: boolean;
 };
 

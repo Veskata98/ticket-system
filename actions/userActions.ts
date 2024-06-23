@@ -3,7 +3,7 @@
 import bcrypt from 'bcryptjs';
 import { revalidatePath } from 'next/cache';
 
-import { TUser } from '@/types';
+import { User } from '@prisma/client';
 
 import prisma from '@/lib/db';
 import { getSession } from '@/lib/session';
@@ -32,7 +32,7 @@ export const createUser = async (prevState: any, formData: FormData) => {
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const user: TUser = await prisma.user.create({ data: { username, hashedPassword } });
+        const user: User = await prisma.user.create({ data: { username, hashedPassword } });
 
         revalidatePath('/admin/dashboard');
         return { username: user.username, error: null };
