@@ -6,7 +6,7 @@ import { ReviewTickets } from '@/components/admin/tickets/review-tickets/ReviewT
 export default function AdminDashboard() {
     return (
         <div className="w-full lg:w-2/3">
-            <div className="flex mx-auto justify-around md:flex-row flex-col">
+            <div className="flex mx-auto justify-around md:flex-row flex-col items-center">
                 <AllUsers />
                 <CreateUser />
             </div>

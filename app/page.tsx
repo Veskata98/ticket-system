@@ -9,7 +9,7 @@ export default async function Home() {
     const user = await getSession();
 
     if (!user) {
-        return <p>Влез в системата, за да добавиш тикет</p>;
+        return <p>Влезте в системата, за да добавите заявка</p>;
     }
 
     return <>{user?.role === 'admin' ? <AdminDashboard /> : <RegularUserDashboard />}</>;

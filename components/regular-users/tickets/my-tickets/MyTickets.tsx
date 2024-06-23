@@ -5,6 +5,8 @@ import { getSession } from '@/lib/session';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { DeleteTicketButton } from '@/components/DeleteTicketButton';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { TicketCard } from '@/components/TicketCard';
 
 export const MyTickets = async () => {
     const user = await getSession();
@@ -19,27 +21,12 @@ export const MyTickets = async () => {
         <div>
             {tickets.length ? (
                 <>
-                    <h2 className="text-xl mb-4 font-semibold">Моите тикети</h2>
-                    <ul className="flex flex-col gap-4">
+                    <h2 className="text-xl mb-4 font-semibold">Моите заявки</h2>
+                    <ScrollArea>
                         {tickets.map((t) => (
-                            <li key={t.id}>
-                                <Card>
-                                    <CardHeader className="flex flex-row justify-between items-center">
-                                        <CardTitle>{t.title}</CardTitle>
-                                        <DeleteTicketButton ticketId={t.id} />
-                                    </CardHeader>
-                                    <CardContent>
-                                        <CardDescription>{t.description}</CardDescription>
-                                    </CardContent>
-                                    <CardFooter className="flex justify-between">
-                                        <p className="text-sm font-semibold">
-                                            Създаден на: {t.createdAt.toLocaleString()}
-                                        </p>
-                                    </CardFooter>
-                                </Card>
-                            </li>
+                            <TicketCard key={t.id} ticket={t} />
                         ))}
-                    </ul>
+                    </ScrollArea>
                 </>
             ) : (
                 <h2>Нямате създадени тикети</h2>

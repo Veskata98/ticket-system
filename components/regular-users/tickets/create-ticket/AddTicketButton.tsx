@@ -14,7 +14,7 @@ export const AddTicketButton = ({ isOpen }: AddTicketButtonProps) => {
             onClick={isOpen}
         >
             <PlusCircle className="w-10 h-10 mb-2" />
-            <h1 className="text-lg font-semibold">Добави тикет</h1>
+            <h1 className="text-lg font-semibold">Добави заявка</h1>
         </Button>
     );
 };

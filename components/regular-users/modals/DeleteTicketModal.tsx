@@ -42,14 +42,14 @@ export const DeleteTicketModal = ({ ticketId, isOpen, onClose }: AddTicketModalP
         >
             <div className="bg-white rounded-lg p-6 shadow-lg w-5/6 md:w-2/3 lg:w-1/3">
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-2xl font-semibold">Изтриване на тикет</h2>
+                    <h2 className="text-2xl font-semibold">Изтриване на заявка</h2>
                     <button onClick={onClose} className="text-red-600 text-3xl pr-2">
                         &times;
                     </button>
                 </div>
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700" htmlFor="title">
-                        Сигурен ли си, че искаш да изтриеш този тикет?
+                        Сигурни ли сте, че искате да изтриете тази заявка?
                     </label>
                 </div>
                 <div className="flex justify-end">

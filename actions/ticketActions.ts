@@ -86,5 +86,23 @@ export const deleteTicket = async (ticketId: string) => {
         });
 
         revalidatePath('/');
-    } catch (error) {}
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+export const completeTicket = async (ticketId: string) => {
+    try {
+        const user = await getSession();
+
+        if (!user || user.role !== 'admin') {
+            redirect('/');
+        }
+
+        await prisma.ticket.update({ where: { id: ticketId }, data: { finished: true } });
+
+        revalidatePath('/');
+    } catch (e) {
+        console.error(e);
+    }
 };

@@ -31,9 +31,10 @@ model User {
 }
 
 model Ticket {
-  id          String @id @unique @default(dbgenerated("uuid_generate_v4()"))
+  id          String  @id @unique @default(dbgenerated("uuid_generate_v4()"))
   title       String
   description String
+  finished    Boolean @default(false)
 
   creatorId String
   creator   User   @relation(fields: [creatorId], references: [id], onDelete: Cascade)
